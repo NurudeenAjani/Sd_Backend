@@ -20,7 +20,6 @@ from shop.views import UserRegistrationView, UserLoginView, ContactFormView, Add
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from django.views.static import serve
 
 router = routers.DefaultRouter()
 router.register(r'menu', MenuViewSet , basename='products')
@@ -34,10 +33,4 @@ urlpatterns = [
     path('login/', UserLoginView.as_view(), name='login'),
     path('api/contact/', ContactFormView.as_view(), name='contact_form'),
 
-] 
-
-urlpatterns += [
-    re_path(r'^media/(?P<path>.*)$', serve, {
-        'document_root': settings.MEDIA_ROOT,
-    }),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
