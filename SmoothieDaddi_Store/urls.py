@@ -14,12 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from shop.views import MenuViewSet
 from shop.views import UserRegistrationView, UserLoginView, ContactFormView, AddToCartView, DeleteCartItemView
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
+from django.views.static import serve
 
 router = routers.DefaultRouter()
 router.register(r'menu', MenuViewSet , basename='products')
@@ -34,3 +35,8 @@ urlpatterns = [
     path('api/contact/', ContactFormView.as_view(), name='contact_form'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    ]
