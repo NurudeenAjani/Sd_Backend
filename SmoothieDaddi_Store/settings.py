@@ -164,7 +164,7 @@ STATIC_URL = 'static/'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'Sd_Backend/media/')
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media/')
 
 CORS_ORIGIN_ALLOW_ALL = True  # Set to True to allow all origins
 CORS_ALLOW_CREDENTIALS = True  # Set to True if you allow cookies to be included in CORS requests
